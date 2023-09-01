@@ -3,6 +3,13 @@ const path = require('path');
 const bodyParser = require('body-parser')
 const fs = require('fs');
 const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/static', express.static(path.join(__dirname, 'public')));
@@ -11,7 +18,6 @@ app.use(bodyParser.json({ extended: true }));
 
 
 app.get('/', (req, res) => {
-  console.log(app.locals.alpr_data)
   res.send('ALPR/ANPR')
 
 })
@@ -22,7 +28,7 @@ app.post('/anpr', (req, res) => {
   let plate = req.body.results[0].plate;
   let confidence = req.body.results[0].confidence;
   let uuid = req.body.uuid;
-  let data = [plate, confidence, uuid];
+  let data = [uuid, plate, confidence];
   app.locals.alpr_data = data
   console.log(app.locals.alpr_data)
   res.send(plate)
