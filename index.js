@@ -12,7 +12,11 @@ app.use(bodyParser.json({extended : true}));
 
 app.post('/anpr', (req, res) => {
  	let plate = req.body.results[0].plate;
-  console.log(plate)
+ 	let confidence= req.body.results[0].confidence;
+ 	let uuid = req.body.uuid;
+  let data = [plate, confidence,  uuid]; 
+  console.log(uuid, plate, confidence,)
+  console.log(typeof(data))
   res.send(plate)
 })
 
