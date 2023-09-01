@@ -5,9 +5,6 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-
-
-
 const path = require('path');
 const bodyParser = require('body-parser')
 
@@ -22,8 +19,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-const alpr_data = app.locals.alpr_data
-
 
 
 app.get('/', (req, res) => {
@@ -32,7 +27,10 @@ app.get('/', (req, res) => {
 
 
 
-app.post('/anpr', (req, res) => {
+
+
+
+app.post('/anpr', async (req, res) => {
   let plate = req.body.results[0].plate;
   let confidence = req.body.results[0].confidence;
   let uuid = req.body.uuid;
@@ -41,6 +39,11 @@ app.post('/anpr', (req, res) => {
   console.log(app.locals.alpr_data)
   res.send(app.locals.alpr_data)
 })
+
+
+
+
+
 
 
 
@@ -53,7 +56,7 @@ app.get('/video', (req, res) => {
 
 
 io.on('connection', (socket) => {
-      socket.emit("hello", 1, "2", { 3: '4', 5: Buffer.from([6]) }, alpr_data);
+        socket.emit("alpr", app.locals.alpr_data);
 });
 
 

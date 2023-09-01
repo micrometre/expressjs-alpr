@@ -24,11 +24,8 @@
 <script>
   var socket = io();
 
-socket.on("hello", (arg1, arg2, arg3, arg4) => {
-  console.log(arg1); // 1
-  console.log(arg2); // "2"
-  console.log(arg3); // { 3: '4', 5: ArrayBuffer (1) [ 6 ] }
-  console.log(arg4); // { 3: '4', 5: ArrayBuffer (1) [ 6 ] }
+socket.on("alpr", (arg1) => {
+  console.log(arg1);
 });
 
 
