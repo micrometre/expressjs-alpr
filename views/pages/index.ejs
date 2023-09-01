@@ -24,24 +24,14 @@
 <script>
   var socket = io();
 
-  var messages = document.getElementById('messages');
-  var form = document.getElementById('form');
-  var input = document.getElementById('input');
+socket.on("hello", (arg1, arg2, arg3, arg4) => {
+  console.log(arg1); // 1
+  console.log(arg2); // "2"
+  console.log(arg3); // { 3: '4', 5: ArrayBuffer (1) [ 6 ] }
+  console.log(arg4); // { 3: '4', 5: ArrayBuffer (1) [ 6 ] }
+});
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (input.value) {
-      socket.emit('chat message', input.value);
-      input.value = '';
-    }
-  });
 
-  socket.on('chat message', function(msg) {
-    var item = document.createElement('li');
-    item.textContent = msg;
-    messages.appendChild(item);
-    window.scrollTo(0, document.body.scrollHeight);
-  });
 </script>
   </body>
 </html>

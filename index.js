@@ -22,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-
+const alpr_data = app.locals.alpr_data
 
 
 
@@ -38,7 +38,8 @@ app.post('/anpr', (req, res) => {
   let uuid = req.body.uuid;
   let data = [uuid, plate, confidence];
   app.locals.alpr_data = data
-  res.send(plate)
+  console.log(app.locals.alpr_data)
+  res.send(app.locals.alpr_data)
 })
 
 
@@ -51,14 +52,10 @@ app.get('/video', (req, res) => {
 
 
 
-
-
 io.on('connection', (socket) => {
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
-    console.log(msg)
-  });
+      socket.emit("hello", 1, "2", { 3: '4', 5: Buffer.from([6]) }, alpr_data);
 });
+
 
 server.listen(5000, () => {
   console.log('listening on *:3000');
