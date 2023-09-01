@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser')
-const fs = require('fs');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
@@ -16,10 +15,19 @@ app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public', 'css')));
 app.use(bodyParser.json({ extended: true }));
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+
+
 
 app.get('/', (req, res) => {
-  res.send('ALPR/ANPR')
-
+    res.render('pages/index.ejs');
 })
 
 
