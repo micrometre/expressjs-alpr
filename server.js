@@ -51,14 +51,14 @@ app.post('/anpr', async (req, res) => {
 
 app.post("/anpr", (req, res, next) => {
   var data = {
-    uuid: req.body.uuid,
    plate : req.body.results[0].plate,
+    uuid: req.body.uuid,
     confidence: req.body.results[0].confidence,
     name: req.body.name,
     email: req.body.email,
   }
-  var sql = 'INSERT INTO alpr (name, email, password) VALUES (?,?,?)'
-  var params = [data.name, data.email, data.password]
+  var sql = 'INSERT INTO alpr (plate, name, email, password) VALUES (?,?,?,?)'
+  var params = [data.plate, data.name, data.email, data.password]
   db.run(sql, params, function (err, result) {
     if (err) {
       res.status(400).json({ "error": err.message })
