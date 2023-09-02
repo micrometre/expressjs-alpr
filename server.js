@@ -1,9 +1,5 @@
 const express = require('express');
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
 const db = require('./database.js')
 
 
@@ -11,20 +7,14 @@ const path = require('path');
 const bodyParser = require('body-parser')
 
 
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public', 'css')));
 app.use(bodyParser.json({ extended: true }));
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 
 
-app.get('/', (req, res) => {
-  res.render('pages/index.ejs');
-})
 
 
 app.get('/video', (req, res) => {
@@ -36,14 +26,14 @@ app.get('/video', (req, res) => {
 
 app.post("/anpr", (req, res, next) => {
   var data = {
-   plate : req.body.results[0].plate,
+    plate: req.body.results[0].plate,
     uuid: req.body.uuid,
     confidence: req.body.results[0].confidence,
     name: req.body.name,
     email: req.body.email,
   }
   var sql = 'INSERT INTO alpr (plate, uuid ) VALUES (?,?)'
-  var params = [data.plate, data.uuid ]
+  var params = [data.plate, data.uuid]
   db.run(sql, params, function (err, result) {
     if (err) {
       res.status(400).json({ "error": err.message })
@@ -75,6 +65,6 @@ app.get("/api/alpr", (req, res, next) => {
 });
 
 
-server.listen(5000, () => {
-  console.log('listening on *:3000');
+app.listen(5000, () => {
+  console.log('listening on *:5000');
 });
