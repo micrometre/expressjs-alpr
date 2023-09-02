@@ -36,18 +36,6 @@ app.get('/video', (req, res) => {
 io.on('connection', (socket) => {
   socket.emit("alpr", app.locals.alpr_data);
 });
-/*
-app.post('/anpr', async (req, res) => {
-  let plate = req.body.results[0].plate;
-  let confidence = req.body.results[0].confidence;
-  let uuid = req.body.uuid;
-  let data = [uuid, plate, confidence];
-  app.locals.alpr_data = data
-  console.log(app.locals.alpr_data)
-  res.send(app.locals.alpr_data)
-})
-
-*/
 
 app.post("/anpr", (req, res, next) => {
   var data = {

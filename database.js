@@ -12,7 +12,6 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         console.log('Connected to the SQLite database.')
         db.run(`CREATE TABLE alpr (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            email text UNIQUE, 
             password text, 
             plate text, 
             uuid text
@@ -22,10 +21,10 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 // Table already created
             }else{
                 // Table just created, creating some rows
-                var insert = 'INSERT INTO alpr (email, password, plate, uuid ) VALUES (?,?,?,?,?)'
-                db.run(insert, ["admin","admin@example.com",md5("admin123456")])
-                db.run(insert, ["user","user@example.com",md5("user123456")])
-                db.run(insert, ["superuser","user@example.com",md5("user123456")])
+                var insert = 'INSERT INTO alpr ( password, plate, uuid ) VALUES (?,?,?,?)'
+                db.run(insert, ["admin",md5("admin123456")])
+                db.run(insert, ["user",md5("user123456")])
+                db.run(insert, ["superuser",md5("user123456")])
             }
         });  
     }
