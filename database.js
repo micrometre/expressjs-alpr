@@ -16,6 +16,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
             email text UNIQUE, 
             password text, 
             plate text, 
+            uuid text, 
             CONSTRAINT email_unique UNIQUE (email)
             )`,
         (err) => {
@@ -23,7 +24,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                 // Table already created
             }else{
                 // Table just created, creating some rows
-                var insert = 'INSERT INTO alpr (name, email, password, plate ) VALUES (?,?,?,?,?)'
+                var insert = 'INSERT INTO alpr (name, email, password, plate, uuid ) VALUES (?,?,?,?,?)'
                 db.run(insert, ["admin","admin@example.com",md5("admin123456")])
                 db.run(insert, ["user","user@example.com",md5("user123456")])
                 db.run(insert, ["superuser","user@example.com",md5("user123456")])
