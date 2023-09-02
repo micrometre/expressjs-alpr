@@ -33,9 +33,6 @@ app.get('/video', (req, res) => {
 
 });
 
-io.on('connection', (socket) => {
-  socket.emit("alpr", app.locals.alpr_data);
-});
 
 app.post("/anpr", (req, res, next) => {
   var data = {
@@ -76,9 +73,6 @@ app.get("/api/alpr", (req, res, next) => {
     })
   });
 });
-
-
-
 
 
 server.listen(5000, () => {
