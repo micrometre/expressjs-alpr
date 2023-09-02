@@ -3,17 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "debug": "DEBUG=anpr-app:* npm start"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "debug": "DEBUG=anpr-app:* npm dev"
   },
   "dependencies": {
     "body-parser": "^1.20.2",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "md5": "^2.3.0",
     "mongoose": "^7.5.0",
     "morgan": "^1.10.0",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
