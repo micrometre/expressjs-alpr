@@ -57,8 +57,8 @@ app.post("/anpr", (req, res, next) => {
     name: req.body.name,
     email: req.body.email,
   }
-  var sql = 'INSERT INTO alpr (plate, uuid, name, email, password) VALUES (?,?,?,?,?)'
-  var params = [data.plate, data.uuid, data.name, data.email, data.password]
+  var sql = 'INSERT INTO alpr (plate, uuid,  email, password) VALUES (?,?,?,?)'
+  var params = [data.plate, data.uuid,  data.email, data.password]
   db.run(sql, params, function (err, result) {
     if (err) {
       res.status(400).json({ "error": err.message })
