@@ -1,16 +1,18 @@
 const express = require('express');
 const app = express();
 const db = require('./database.js')
-
+const cors = require('cors');
 
 const path = require('path');
 const bodyParser = require('body-parser')
 
 
+app.use(cors()) // Use this after the variable declaration
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/static', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public', 'css')));
 app.use(bodyParser.json({ extended: true }));
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
