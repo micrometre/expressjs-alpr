@@ -1,16 +1,10 @@
 const express = require('express');
 const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const db = require('./database.js')
 const cors = require('cors');
+
 const path = require('path');
 const bodyParser = require('body-parser')
-const port = process.env.PORT || 5000;
-
-
-
-
-
 
 
 app.use(cors()) // Use this after the variable declaration
@@ -22,28 +16,6 @@ app.use(bodyParser.json({ extended: true }));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-    socket.on('new message', function (data) {
-    var data = (data);
-    // we tell the client to execute 'new message'
-    socket.broadcast.emit('new message', {
-      username: socket.username,
-      message: data
-    });
-    db.serialize(function() {
-      console.log('inserting message to database');
-      var insertMessageStr = "INSERT INTO messages (username, content, posted) VALUES ('" + socket.username + "','" + data.toString() + "'," + Date.now() + ");"
-      console.log(insertMessageStr)
-      db.run(insertMessageStr);
-    });
-  });
-});
-
-
-
 
 
 app.get('/', (req, res) => {
@@ -99,7 +71,6 @@ app.get("/api/alpr", (req, res, next) => {
 });
 
 
-
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
+app.listen(5000, () => {
+  console.log('listening on *:5000');
 });
