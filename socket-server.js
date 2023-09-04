@@ -10,6 +10,7 @@ const bodyParser = require('body-parser')
 
 const db = require('./database.js')
 
+const alpr_data = 
 
 app.use(cors()) 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -74,10 +75,15 @@ app.get("/api/alpr", (req, res, next) => {
   });
 });
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-});
 
+
+
+io.on('connection', (socket) => {
+  socket.on('chat message', msg => {
+    io.emit('chat message', msg);
+    console.log(msg)
+  });
+});
 
 
 
