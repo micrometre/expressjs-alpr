@@ -6,12 +6,19 @@ console.log(data);
 
 <div>
 
+
+               <h3>Alpr Video</h3>
+                <video width="320" height="240" controls>
+                <source src="http://localhost:5000/video"type="video/mp4">
+</div>
+
+<div>
+
 		{data.data.map((alpr) => 
 		<li>{alpr.id}</li>
 		<li>{alpr.plate}</li>
 		<li>{alpr.uuid}</li>
 		)}
-
 
 
 </div>
