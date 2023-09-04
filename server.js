@@ -9,60 +9,30 @@ app.use('/', express.static('public'));
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server })
 
-
-const db = require('./database.js')
-
-
-
-
-
 var data = "Real-Time Update 1";
 var number = 1;
 
+wss.on('connection', ws => {
 
-
-
-
-
-app.get("/api/alpr", (req, res, next) => {
-  var sql = "select * from alpr"
-  var params = []
-  db.all(sql, params, (err, rows) => {
-    if (err) {
-      res.status(400).json({ "error": err.message });
-      return;
-    }
-    res.json({
-      "message": "success",
-      "data": rows
-    })
-  });
-
-  wss.on('connection', ws => {
-    ws.on('message', message => {
-      console.log(`Received message => ${message}`)
-    })
-
-    var interval = setInterval(function () {
-      data = "Real-Time Update " + number;
-      console.log("SENT: " + data);
-      ws.send(data)
-      number++;
-    }, randomInteger(2, 9) * 1000);
-
-    ws.on('close', function close() {
-      clearInterval(interval);
-    });
+  ws.on('message', message => {
+    console.log(`Received message => ${message}`)
   })
 
-  function randomInteger(min, max) {
+  var interval = setInterval(function(){
+    data = "Real-Time Update "+number;
+    console.log("SENT: "+data);
+    ws.send(data)
+    number++;
+  }, randomInteger(2,9)*1000);  
+
+  ws.on('close', function close() {
+    clearInterval(interval);
+  });
+})
+
+function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-
-
-});
-
+}  
 
 server.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`)
