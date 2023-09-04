@@ -1,0 +1,17 @@
+---
+const response = await fetch("http://localhost:5000/api/alpr");
+const data = await response.json();
+console.log(data);
+---
+
+<div>
+
+		{data.data.map((alpr) => 
+		<li>{alpr.id}</li>
+		<li>{alpr.plate}</li>
+		<li>{alpr.uuid}</li>
+		)}
+
+
+
+</div>

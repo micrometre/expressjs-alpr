@@ -1,17 +1,13 @@
 ---
-const response = await fetch("http://localhost:5000/api/alpr");
-const data = await response.json();
-console.log(data);
+import Layout from '../layouts/Layout.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button';
+import GetAlpr from '../components/GetAlpr.astro'
 ---
 
-<div>
+<Layout title="Welcome to Astro.">
+	<GetAlpr/>
+</Layout>
 
-		{data.data.map((alpr) => 
-		<li>{alpr.plate}</li>
-		<li>{alpr.id}</li>
-		<li>{alpr.uuid}</li>
-		)}
-
-
-
-</div>
+<style>
+</style>
