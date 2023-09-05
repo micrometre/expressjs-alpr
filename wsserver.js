@@ -1,24 +1,22 @@
-const http = require('http')
-const express = require('express')
-const WebSocket = require('ws')
-const app = express()
+const express = require('express');
+const app = express();
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser')
+const http = require('http')
+const WebSocket = require('ws')
 const port = 5000
-const server = http.createServer(app);
-const wss = new WebSocket.Server({ server })
 const db = require('./database.js')
 
 
 app.use(cors()) // Use this after the variable declaration
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/static', express.static(path.join(__dirname, 'public')));
-app.use('/', express.static('public'));
-app.use(express.static(path.join(__dirname, 'public', 'css')));
 app.use(bodyParser.json({ extended: true }));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use('/', express.static('public'));
+
+
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server })
 
 
 wss.on('connection', ws => {
@@ -28,7 +26,7 @@ wss.on('connection', ws => {
   var interval = setInterval(function () {
     db.all("SELECT * FROM alpr", function (err, rows) {
       rows.forEach(function (row) {
-        data = JSON.stringify(row) ;
+        data = JSON.stringify(row);
         console.log(data)
         ws.send(data)
       });
@@ -45,18 +43,12 @@ function randomInteger(min, max) {
 }
 
 
-
-
-
-
-
-
-
 app.get('/video', (req, res) => {
   console.log(app.locals.alpr_data)
   res.sendFile('alprVideo.mp4', { root: 'public/uploads' });
 
 });
+
 app.post("/anpr", (req, res, next) => {
   var data = {
     plate: req.body.results[0].plate,
@@ -79,6 +71,9 @@ app.post("/anpr", (req, res, next) => {
     })
   });
 })
+
+
+
 app.get("/api/alpr", (req, res, next) => {
   var sql = "select * from alpr"
   var params = []
@@ -93,8 +88,6 @@ app.get("/api/alpr", (req, res, next) => {
     })
   });
 });
-
-
 
 server.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`)
