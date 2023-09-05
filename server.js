@@ -21,30 +21,23 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-var data = "Real-Time Update 1";
-var number = 1;
 wss.on('connection', ws => {
   ws.on('message', message => {
     console.log(`Received message => ${message}`)
   })
   var interval = setInterval(function () {
-    data = "Real-Time Update " + number;
-    console.log("SENT: " + data);
-    number++;
-  }, randomInteger(2, 9) * 1000);
-
-  var alprData= db.all("SELECT * FROM alpr", function (err, rows) {
-    rows.forEach(function (row) {
-      var plates = JSON.stringify(row)
-      ws.send(plates)
+    db.all("SELECT * FROM alpr", function (err, rows) {
+      rows.forEach(function (row) {
+        data = JSON.stringify(row) ;
+        console.log(data)
+        ws.send(data)
+      });
     });
-  });
-  
+  }, randomInteger(2, 9) * 1000);
   ws.on('close', function close() {
     clearInterval(interval);
   });
 })
-
 
 
 function randomInteger(min, max) {
