@@ -1,17 +1,29 @@
 <html>
-    <head>
-        <title>Server Sent Events</title>
-    </head>
-    <body>
-        <div id="updates"></div>
-    </body>
-    <script type="text/javascript">    
 
-        const connection = new WebSocket('ws://localhost:5000')
+<head>
+    <title>Server Sent Events</title>
+</head>
 
-        connection.onmessage = e => {
-            document.getElementById('updates').innerHTML = document.getElementById('updates').innerHTML + "Received: "+e.data+"</br>";
-        }
+<body>
 
-    </script>
+    <div id="video">
+
+        <h3>Alpr Video</h3>
+        <video width="320" height="240" controls>
+            <source src="uploads/alprVideo.mp4" type="video/mp4">
+
+    </div>
+    <div id="updates"></div>
+
+</body>
+<script type="text/javascript">
+
+    const connection = new WebSocket('ws://localhost:5000')
+
+    connection.onmessage = e => {
+        document.getElementById('updates').innerHTML = document.getElementById('updates').innerHTML + "Received: " + e.data + "</br>";
+    }
+
+</script>
+
 </html>

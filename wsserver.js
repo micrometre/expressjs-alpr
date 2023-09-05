@@ -20,16 +20,23 @@ const wss = new WebSocket.Server({ server })
 
 
 
+
+
+
 app.post("/anpr", (req, res, next) => {
   data = req.body.results[0].plate,
   console.log(data)
+
   wss.on('connection', function connection(ws) {
     ws.on('message', function message(data) {
       console.log('received: %s', data);
     });
       var interval = setInterval(function () {
+
     ws.send(data);
+
   }, randomInteger(2, 9) * 1000);
+
   });
   res.send(data)
   return
