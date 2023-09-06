@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+
+<body>
+  <div id="events">
+
+  </div>
+  <h1>JavaScript Fetch API</h1>
+  <h1>Getting server updates</h1>
+  <div id="result"></div>
+
+  <script>
+    if (typeof (EventSource) !== "undefined") {
+      var source = new EventSource("/events");
+      source.onmessage = function (event) {
+        document.getElementById("result").innerHTML += event.data + "<br>";
+      };
+    } else {
+      document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+    }
+  </script>
+
+
+
+</body>
+
+</html>

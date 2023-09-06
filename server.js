@@ -27,7 +27,6 @@ function eventsHandler(request, response, next) {
   response.writeHead(200, headers);
 
   const data = `data: ${JSON.stringify(facts)}\n\n`;
-
   response.write(data);
 
   const clientId = Date.now();
@@ -57,6 +56,7 @@ async function addFact(request, respsonse, next) {
   const newFact = request.body;
   facts.push(newFact);
   respsonse.json(newFact)
+console.log(newFact)
   return sendEventsToAll(newFact);
 }
 
