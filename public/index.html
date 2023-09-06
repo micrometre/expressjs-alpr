@@ -1,33 +1,41 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>Server Sent Events</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
+
 <body>
-
-    <div id="video">
-
-        <h3>Alpr Video</h3>
-        <video width="320" height="240" controls>
-            <source src="uploads/alprVideo.mp4" type="video/mp4">
+    <div id="events">
 
     </div>
-    <div id="updates" style="overflow-y:scroll; overflow-x:hidden; height:400px;">
+    <h1>JavaScript Fetch API</h1>
+    <h2>The fetch() Method</h2>
+    <p id="demo">Fetch a file to change this text.</p>
+
+    <script>
 
 
+        const $events = document.getElementById('events');
+        const newItem = (content) => {
+            const item = document.createElement('li');
+            item.innerText = content;
+            return item;
+        };
 
-    </div>
+        $.ajax({
+            type: "GET",
+            url: "http://143.110.166.250:5000/events",
+            contentType: "application/json",
+            dataType: 'json',
+            success: function (data) {
+                console.log(data)
+            },
+        });
+
+    </script>
 
 </body>
-<script type="text/javascript">
-
-    const connection = new WebSocket('ws://localhost:5000')
-
-    connection.onmessage = e => {
-        document.getElementById('updates').innerHTML = document.getElementById('updates').innerHTML + "Received: " + e.data + "</br>";
-    }
-
-</script>
 
 </html>

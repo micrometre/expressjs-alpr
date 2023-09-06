@@ -9,7 +9,6 @@ let facts = [];
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/', express.static('public'));
 
 app.get('/status', function (request, response) {
     return response.json({ clients: clients.length });
@@ -57,6 +56,7 @@ async function addFact(request, respsonse, next) {
   const newFact = request.body;
   facts.push(newFact);
   respsonse.json(newFact)
+  console.log(newFact)
   return sendEventsToAll(newFact);
 }
 

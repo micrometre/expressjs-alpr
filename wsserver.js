@@ -8,6 +8,7 @@ const WebSocket = require('ws')
 const port = 5000
 const db = require('./database.js')
 
+
 app.use(cors()) // Use this after the variable declaration
 app.use(bodyParser.json({ extended: true }));
 app.use('/', express.static('public'));
@@ -15,17 +16,21 @@ app.use('/', express.static('public'));
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server })
-
+wss.setMaxListeners(18)
 
 app.post("/anpr", (req, res, next) => {
-  data = req.body.results[0].plate,
-    console.log(data)
+    var data = {
+    plate: req.body.results[0].plate,
+  }
+  //data = req.body.results[0].plate,
+    console.log(data.plate)
+console.log(wss.getMaxListeners())
   wss.on('connection', function connection(ws) {
     ws.on('message', function message(data) {
-      console.log('received: %s', data);
+      console.log('received: %s', data.plate);
     });
     var interval = setInterval(function () {
-      ws.send(data);
+      ws.send(data.plate);
     }, randomInteger(2, 9) * 2000);
     ws.on('close', function close() {
       clearInterval(interval);
