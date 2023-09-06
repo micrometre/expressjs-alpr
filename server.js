@@ -20,15 +20,18 @@ const wss = new WebSocket.Server({ server })
 wss.setMaxListeners(18)
 
 app.post("/anpr", (req, res, next) => {
-  data = req.body.results[0].plate,
-    console.log(data)
+    var data = {
+    plate: req.body.results[0].plate,
+  }
+  //data = req.body.results[0].plate,
+    console.log(data.plate)
 console.log(wss.getMaxListeners())
   wss.on('connection', function connection(ws) {
     ws.on('message', function message(data) {
-      console.log('received: %s', data);
+      console.log('received: %s', data.plate);
     });
     var interval = setInterval(function () {
-      ws.send(data);
+      ws.send(data.plate);
     }, randomInteger(2, 9) * 2000);
     ws.on('close', function close() {
       clearInterval(interval);
