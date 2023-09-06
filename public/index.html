@@ -25,6 +25,7 @@
     const connection = new WebSocket('ws://localhost:5000')
 
     connection.onmessage = e => {
+        console.log((data.e))
         document.getElementById('updates').innerHTML = document.getElementById('updates').innerHTML + "Received: " + e.data + "</br>";
     }
 
