@@ -53,7 +53,7 @@ function sendEventsToAll(newFact) {
   clients.forEach(client => client.response.write(`data: ${JSON.stringify(newFact)}\n\n`))
 }
 async function addFact(request, respsonse, next) {
- const newFact = request.body;
+ const newFact = request.body.results[0].plate;
   /*const newFact = {
     plate: request.body.results[0].plate,
   }
