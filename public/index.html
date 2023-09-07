@@ -13,6 +13,19 @@
 
     #result {
       border: 15px solid green;
+      overflow-x: hidden;
+      overflow-y: visible;
+      height: 500px;
+    }
+
+    #result {
+      height: 100px;
+      width: 100px;
+      background-color: coral;
+      padding: 15px;
+      border: 10px solid black;
+      margin: 10px;
+      overflow: scroll;
     }
   </style>
 
@@ -20,19 +33,47 @@
 
 <body>
 
+
+  <div id="box">
+    <div id="preexisting-jack">
+      I was here all along!
+    </div>
+  </div>
+  <div id="box2">
+    <div id="preexisting-jack">
+      I was here all along!
+    </div>
+  </div>
+
+
+
+
+
   <h1>Getting server updates</h1>
+
   <div id="result">
 
   </div>
 
+
+
   <script>
+
+
+
+
     if (typeof (EventSource) !== "undefined") {
       var source = new EventSource("/events");
       source.onmessage = function (event) {
         var sendData = JSON.parse(event.data)
-        document.getElementById("result").innerHTML +=   sendData.results[0].plate + "<br>";
+        const box2 = document.getElementById('box2')
+        const jack2 = document.createElement("div")
+        jack2.innerHTML += sendData.results[0].plate + "<br>";
+        document.getElementById("result")
+        box2.insertBefore(jack2, box2.firstChild)
+        const element = document.getElementById("result");
+        document.getElementById("result").innerHTML += sendData.results[0].plate + "<br>";
         console.log(sendData)
-
       };
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
