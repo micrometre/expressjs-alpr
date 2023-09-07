@@ -44,23 +44,7 @@
       I was here all along!
     </div>
   </div>
-
-
-
-
-
-  <h1>Getting server updates</h1>
-
-  <div id="result">
-
-  </div>
-
-
-
   <script>
-
-
-
 
     if (typeof (EventSource) !== "undefined") {
       var source = new EventSource("/events");
@@ -72,7 +56,6 @@
         document.getElementById("result")
         box2.insertBefore(jack2, box2.firstChild)
         const element = document.getElementById("result");
-        document.getElementById("result").innerHTML += sendData.results[0].plate + "<br>";
         console.log(sendData)
       };
     } else {
