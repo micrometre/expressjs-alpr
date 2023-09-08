@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-  <script src="js/sse.js" charset="utf-8"></script>
-  <div id="box">
+
+
+  <div id="alpr-data">
+    <script src="js/sse.js" charset="utf-8"></script>
+    <div id="box">
+    </div>
   </div>
+
+
+<script>
+
+var folder = "./images";
+$.ajax({
+    url : folder,
+    success: function (data) {
+        $(data).find("a").attr("href", function (i, val) {
+            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
+        var newdiv2 = document.createElement( "div" )
+                $("#alpr-images").append( "<img src='"+  val +"'>" );
+            } 
+        });
+    }
+});
+
+</script>
+  <div id="alpr-images">
+</div>
+
 </body>
 
 </html>

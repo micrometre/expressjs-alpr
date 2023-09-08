@@ -16,6 +16,7 @@
     "md5": "^2.3.0",
     "mongoose": "^7.5.0",
     "morgan": "^1.10.0",
+    "serve-index": "^1.9.1",
     "socket.io": "^4.7.2",
     "sqlite3": "^5.1.6",
     "validator": "^13.11.0",

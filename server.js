@@ -1,7 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const serveIndex = require('serve-index')
+const path = require('path');
+
 const app = express();
+
 const PORT = 5000
 let clients = [];
 let facts = [];
@@ -11,9 +15,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static('public'));
 
-app.get('/status', function (request, response) {
-  return response.json({ clients: clients.length });
-});
+
+app.use('/images', serveIndex(path.join(__dirname, '/images')));
+
+
+
+
 
 
 // ...
