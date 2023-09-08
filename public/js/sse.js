@@ -2,7 +2,7 @@
       var source = new EventSource("/events");
       source.onmessage = function (event) {
         const box = document.getElementById('box')
-        const alpr = document.createElement('h1')
+        const alpr = document.createElement('h2')
         alpr.innerHTML += event.data.replace(/[{("")}]/g, '') + "<br>";
         box.insertBefore(alpr, box.firstChild)
       };
