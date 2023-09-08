@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static('public'));
 
 app.get('/status', function (request, response) {
-    return response.json({ clients: clients.length });
-  });
+  return response.json({ clients: clients.length });
+});
 
 
 // ...
@@ -53,14 +53,10 @@ function sendEventsToAll(newFact) {
   clients.forEach(client => client.response.write(`data: ${JSON.stringify(newFact)}\n\n`))
 }
 async function addFact(request, respsonse, next) {
- const newFact = request.body.results[0].plate;
-  /*const newFact = {
-    plate: request.body.results[0].plate,
-  }
-  */ 
+  const newFact = request.body.results[0].plate;
   facts.push(newFact);
   respsonse.send(newFact)
-console.log(newFact)
+  console.log(newFact)
   return sendEventsToAll(newFact);
 }
 

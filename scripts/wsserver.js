@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const http = require('http')
 const WebSocket = require('ws')
 const port = 5000
-const db = require('./database.js')
+const db = require('../config/database.js')
 
 
 app.use(cors()) // Use this after the variable declaration
