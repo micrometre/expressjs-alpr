@@ -11,20 +11,14 @@
       border: 15px solid blue;
     }
 
-    #result {
+    #box {
       border: 15px solid green;
-      overflow-x: hidden;
-      overflow-y: visible;
       height: 500px;
-    }
-
-    #result {
-      height: 100px;
-      width: 100px;
+      width: 200px;
       background-color: coral;
-      padding: 15px;
+      padding: 5rem;
       border: 10px solid black;
-      margin: 10px;
+      margin: 5rem;
       overflow: scroll;
     }
   </style>
@@ -32,39 +26,30 @@
 </head>
 
 <body>
+  <div id="box">
+    <p>Lorem ipsum...</p>
+  </div>
+
 
   <div id="result">
-
-  </div>
-
-
-  <div id="box">
-    <div id="preexisting-jack">
-      I was here all along!
-    </div>
-  </div>
-  <div id="box2">
-    <div id="preexisting-jack">
-      I was here all along!
-    </div>
   </div>
   <script>
-
     if (typeof (EventSource) !== "undefined") {
       var source = new EventSource("/events");
       source.onmessage = function (event) {
-        document.getElementById("result").innerHTML += event.data + "<br>";
-
+        const box = document.getElementById('box')
+        const alpr = document.createElement('h1')
+        //alpr.innerHTML = 'ALPR data append'
+        alpr.innerHTML += event.data + "<br>";
+        box.insertBefore(alpr, box.firstChild)
+        //document.getElementById("result")
         console.log(event.data)
         console.log(typeof (event.data))
       };
     } else {
-      document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+      document.getElementById("box").innerHTML = "Sorry, your browser does not support server-sent events...";
     }
   </script>
-
-
-
 </body>
 
 </html>
