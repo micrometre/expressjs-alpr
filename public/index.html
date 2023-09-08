@@ -16,24 +16,6 @@
   </div>
 
 
-<script>
-
-var folder = "/images";
-$.ajax({
-    url : folder,
-    success: function (data) {
-        $(data).find("a").attr("href", function (i, val) {
-            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
-        var newdiv2 = document.createElement( "div" )
-                $("#alpr-images").append( "<img src='"+  val +"'>" );
-            } 
-        });
-    }
-});
-
-</script>
-  <div id="alpr-images">
-</div>
 
 </body>
 

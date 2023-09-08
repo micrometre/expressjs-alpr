@@ -16,7 +16,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static('public'));
 
 
-app.use('/images', serveIndex(path.join(__dirname, '/images')));
+
+app.use('/ftp', express.static('public/ftp'), serveIndex('public/ftp', {'icons': true}))
+app.use('/images', express.static('public/images'), serveIndex('public/images', {'icons': true}))
+app.use('/uploads', express.static('public/uploads'), serveIndex('public/uploads', {'icons': true}))
 
 
 
