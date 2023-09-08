@@ -1,90 +1,14 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-
-
-  <style>
-    body {
-      border: 15px solid blue;
-    }
-
-    #box {
-      border: 15px solid green;
-      height: 500px;
-      width: 200px;
-      background-color: coral;
-      padding: 5rem;
-      border: 10px solid black;
-      margin: 5rem;
-      overflow: scroll;
-    }
-
-    #alpr-image {
-      border: 15px solid green;
-      min-height: 50vh;
-    }
-
-  </style>
-
+  <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-
-<script>
-
-
-  
-</script>
-
-
-
-
-  
-  <section class="bg-light">
-    <div class="container-fluid">
-      <div id="alpr-image">
-      </div>
-    </div>
-  </section>
-  <script>
-    var bgImageArray = ["1.jpg", "2.jpg", "3.jpg"]
-    var src = "/images/"
-    function imageBackgroundSequence() {
-      document.getElementById('alpr-image').style.background = "url(" + src + bgImageArray[0] + ")";
-    }
-    imageBackgroundSequence()
-
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
+  <script src="js/sse.js" charset="utf-8"></script>
   <div id="box">
   </div>
-  <script>
-    if (typeof (EventSource) !== "undefined") {
-      var source = new EventSource("/events");
-      source.onmessage = function (event) {
-        const box = document.getElementById('box')
-        const alpr = document.createElement('h1')
-        alpr.innerHTML += event.data.replace(/[{("")}]/g, '') + "<br>";
-        box.insertBefore(alpr, box.firstChild)
-      };
-    } else {
-      document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
-    }
-  </script>
 </body>
 
 </html>

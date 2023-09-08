@@ -1,0 +1,19 @@
+    body {
+      border: 15px solid blue;
+    }
+
+    #box {
+      border: 15px solid green;
+      height: 500px;
+      width: 200px;
+      background-color: coral;
+      padding: 5rem;
+      border: 10px solid black;
+      margin: 5rem;
+      overflow: scroll;
+    }
+
+    #alpr-image {
+      border: 15px solid green;
+      min-height: 50vh;
+    }
