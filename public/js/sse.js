@@ -1,4 +1,3 @@
-console.log('sse')
     if (typeof (EventSource) !== "undefined") {
       var source = new EventSource("/events");
       source.onmessage = function (event) {
