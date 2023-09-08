@@ -33,6 +33,10 @@
 
 <body>
 
+  <div id="result">
+
+  </div>
+
 
   <div id="box">
     <div id="preexisting-jack">
@@ -44,36 +48,15 @@
       I was here all along!
     </div>
   </div>
-
-
-
-
-
-  <h1>Getting server updates</h1>
-
-  <div id="result">
-
-  </div>
-
-
-
   <script>
-
-
-
 
     if (typeof (EventSource) !== "undefined") {
       var source = new EventSource("/events");
       source.onmessage = function (event) {
-        var sendData = JSON.parse(event.data)
-        const box2 = document.getElementById('box2')
-        const jack2 = document.createElement("div")
-        jack2.innerHTML += sendData.results[0].plate + "<br>";
-        document.getElementById("result")
-        box2.insertBefore(jack2, box2.firstChild)
-        const element = document.getElementById("result");
-        document.getElementById("result").innerHTML += sendData.results[0].plate + "<br>";
-        console.log(sendData)
+        document.getElementById("result").innerHTML += event.data + "<br>";
+
+        console.log(event.data)
+        console.log(typeof (event.data))
       };
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";

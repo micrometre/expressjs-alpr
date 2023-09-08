@@ -15,6 +15,13 @@
       border: 15px solid green;
       overflow-x: hidden;
       overflow-y: visible;
+      height: 500px;
+      width: 100px;
+      background-color: coral;
+      padding: 15px;
+      border: 10px solid black;
+      margin: 10rem;
+      overflow: scroll;
     }
   </style>
 
@@ -22,28 +29,27 @@
 
 <body>
 
-  <h1>Getting server updates</h1>
-
-  <div id="box">
-    <div id="preexisting-jack">
-    </div>
-  </div>
-  <div id="box2">
-    <div id="preexisting-jack">
-    </div>
-  </div>
-
-  <div id="result">
-  </div>
 
 
+<div id="box">
+  <p>Lorem ipsum...</p>
+  <div>Jack!</div>
+</div>
 
+  
   <script>
-    const box = document.getElementById('box')
-    const jack = document.createElement('div')
-    jack.innerHTML = 'Jack!'
-    box.insertBefore(jack, box.firstChild)
+
+const box = document.getElementById('box')
+const jack = document.createElement('div')
+jack.innerHTML = 'Jack! append'
+box.appendChild(jack)
+
+
   </script>
+  <div id="result">
+
+  </div>
+  
   <script>
 
     if (typeof (EventSource) !== "undefined") {
@@ -51,13 +57,11 @@
       source.onmessage = function (event) {
         document.getElementById("result").innerHTML += event.data + "<br>";
         console.log(event.data)
-        console.log(typeof(event.data))
+        console.log(typeof (event.data))
       };
     } else {
       document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
     }
-
-
   </script>
 
 
