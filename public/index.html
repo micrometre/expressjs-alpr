@@ -21,45 +21,65 @@
       margin: 5rem;
       overflow: scroll;
     }
+    #animated-bg {
+  transition: background 6s;
+  min-height:50vh;
+  position:relative;
+  background-size: cover;
+  background-color: white no-repeat center center fixed;
+  transition: 3s;
+}
+#animated-bg:before {
+content:"";
+position:absolute;
+top:0;
+bottom:0;
+left:0;
+right:0;
+background-color: #4b555f;
+opacity:0.3;
+}
   </style>
 
 </head>
 
 <body>
 
-      <section class="bg-light" >
-            <div class="container-fluid">
-                <div id="animated-bg">
-                </div>
-            </div>
-        </section>
-    <script>
-        var bgImageArray = ["1.jpg", "leavingroom-0.webp",  "hair-drasers.webp"]
-          , base = "/images/"
-          , secs = 4;
-        bgImageArray.forEach(function(img) {
-            new Image().src = base + img;
-            // caches images, avoiding white flash between background replacements
-        });
-        function backgroundSequence() {
-            window.clearTimeout();
-            var k = 0;
-            for (i = 0; i < bgImageArray.length; i++) {
+
+  <section class="bg-light" >
+    <div class="container-fluid">
+        <div id="animated-bg">
+        </div>
+    </div>
+</section>
+<script>
+var bgImageArray = ["1.jpg", "2.jpg",  "3.jpg"]
+  , base = "/images/"
+  , secs = 4;
+bgImageArray.forEach(function(img) {
+    new Image().src = base + img;
+    // caches images, avoiding white flash between background replacements
+});
+function backgroundSequence() {
+    window.clearTimeout();
+    var k = 0;
+    for (i = 0; i < bgImageArray.length; i++) {
+        setTimeout(function() {
+document.getElementById('animated-bg').style.background = "url(" + base + bgImageArray[k] + ") no-repeat center center";
+            document.getElementById('animated-bg').style.backgroundSize = "cover";
+            if ((k + 1) === bgImageArray.length) {
                 setTimeout(function() {
-    document.getElementById('animated-bg').style.background = "url(" + base + bgImageArray[k] + ") no-repeat center center";
-                    document.getElementById('animated-bg').style.backgroundSize = "cover";
-                    if ((k + 1) === bgImageArray.length) {
-                        setTimeout(function() {
-                            backgroundSequence()
-                        }, (secs * 1000))
-                    } else {
-                        k++;
-                    }
-                }, (secs * 1000) * i)
+                    backgroundSequence()
+                }, (secs * 1000))
+            } else {
+                k++;
             }
-        }
-        backgroundSequence();
-    </script>
+        }, (secs * 1000) * i)
+    }
+}
+backgroundSequence();
+</script>
+
 
 
 
