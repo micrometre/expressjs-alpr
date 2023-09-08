@@ -4,7 +4,7 @@
 
     #box {
       border: 15px solid green;
-      height: 500px;
+      height: 50px;
       width: 200px;
       background-color: coral;
       padding: 5rem;
@@ -15,5 +15,5 @@
 
     #alpr-image {
       border: 15px solid green;
-      min-height: 50vh;
+      height: 50px;
     }
