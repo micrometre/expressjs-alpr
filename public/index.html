@@ -28,44 +28,30 @@
 </head>
 
 <body>
-
-
-
-<div id="box">
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <p>Lorem ipsum...</p>
-  <div>Jack!</div>
-</div>
-
-  
-  <script>
-
-const box = document.getElementById('box')
-const jack = document.createElement('div')
-jack.innerHTML = 'Jack! append'
-box.appendChild(jack)
-
-
-  </script>
-  <div id="result">
-
+  <div id="box">
+    <p>Lorem ipsum...</p>
   </div>
-  
-  <script>
 
+
+
+
+<script>
+    const box = document.getElementById('box')
+    const jack = document.createElement('div')
+    jack.innerHTML = 'Jack! append'
+    box.insertBefore(jack, box.firstChild)
+    box.appendChild(jack)
+
+</script>
+
+
+
+
+
+
+<div id="result">
+  </div>
+  <script>
     if (typeof (EventSource) !== "undefined") {
       var source = new EventSource("/events");
       source.onmessage = function (event) {
@@ -77,9 +63,5 @@ box.appendChild(jack)
       document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
     }
   </script>
-
-
-
 </body>
-
 </html>
