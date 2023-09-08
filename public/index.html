@@ -7,6 +7,30 @@
 </head>
 
 <body>
+<div id="image-box">
+
+</div>
+
+
+<script>
+
+    var container = document.body;
+
+    var foo = document.createElement('p');
+
+    foo.innerText = 'javaScript works';
+
+    container.appendChild(foo);
+
+
+    const box = document.getElementById('image-box')
+    const alpr = document.createElement('h1')
+       alpr.innerHTML = ("appended to div");
+        box.insertBefore(alpr, box.firstChild)
+
+
+  </script>
+
 
 
   <div id="alpr-data">
