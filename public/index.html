@@ -3,36 +3,38 @@
 
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <link rel="stylesheet" href="css/main.css">
 </head>
 
-<div id="alpr-images">
-  <h2>The XMLHttpRequest Object</h2>
-</div>
-<script src="js/xhr.js">
 
-</script>
+
+<body>
 
 
 
 
 
 
-<div id="alpr-data">
-  <script src="js/sse.js" charset="utf-8"></script>
   <div id="box">
+    <div>Jack!</div>
   </div>
-</div>
-<div id="image-box">
-</div>
-<!-- script src="js/jq-images.js" charset="utf-8"> </script -->
-
-<div id='fileNames'></div>
 
 
+  <div id="alpr-images-box">
+    <div id="alpr-images">
+      I was here all along!
+    </div>
+  </div>
 
+  <script>
+    function loadImages(event) {
+      const alprImagesBox = document.getElementById('alpr-images-box')
+      const alprPlateDiv = document.createElement("div")
+      alprPlateDiv.innerHTML = 'ALpr images prepended here'
+      alprImagesBox.insertBefore(alprPlateDiv, alprImagesBox.firstChild)
+    };
 
-
+    loadImages()
+  </script>
 
 
 </body>

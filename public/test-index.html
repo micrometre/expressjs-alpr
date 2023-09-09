@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+
+
+
+
+
+
+<div>
+  <div id="animated-bg">
+  </div>
+</div>
+<p>Call a function once for each array element:</p>
+
+<p id="demo"></p>
+
+<script>
+
+const numbers = [45, 4, 9, 16, 25];
+
+let txt = "";
+numbers.forEach(myFunction);
+document.getElementById("demo").innerHTML = txt;
+
+function myFunction(value) {
+  txt += value + "<br>"; 
+}
+
+</script>
+
+
+
+<script>
+
+  var bgImageArray = ["3.jpg", "4.jpg"],
+    base = "/images/"
+  function backgroundSequence() {
+    var k = 0;
+    const imageArray = document.getElementById('animated-bg')
+    const alprImage = document.createElement('h2')
+    alprImage.innerHTML = ('testing this');
+    imageArray.insertBefore(alprImage, imageArray.firstChild)
+  }
+  backgroundSequence();
+
+
+</script>
+
+
+</div>
+
+
+
+
+
+<div id="alpr-data">
+  <script src="js/sse.js" charset="utf-8"></script>
+  <div id="box">
+  </div>
+</div>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

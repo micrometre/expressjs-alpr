@@ -63,6 +63,7 @@ function sendEventsToAll(newFact) {
 }
 async function addFact(request, respsonse, next) {
   const newFact = request.body.results[0].plate;
+  const newFact2 = request.body;
   facts.push(newFact);
   respsonse.send(newFact)
   console.log(newFact)
