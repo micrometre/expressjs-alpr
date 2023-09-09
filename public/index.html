@@ -6,27 +6,28 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 
-<body>
-  <div id="alpr-data">
-    <script src="js/sse.js" charset="utf-8"></script>
-    <div id="box">
-    </div>
+<div id="alpr-images">
+  <h2>The XMLHttpRequest Object</h2>
+</div>
+<script src="js/xhr.js">
+
+</script>
+
+
+
+
+
+
+<div id="alpr-data">
+  <script src="js/sse.js" charset="utf-8"></script>
+  <div id="box">
   </div>
-  <div id="image-box">
+</div>
+<div id="image-box">
+</div>
+<!-- script src="js/jq-images.js" charset="utf-8"> </script -->
 
-  </div>
-
-
-  <div id='fileNames'></div>
-
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $.get("./images", function (images) {
-        $("#fileNames").append(images);
-      });
-    })
-  </script>
-
+<div id='fileNames'></div>
 
 
 
