@@ -1,42 +1,122 @@
-<!DOCTYPE html>
 <html>
-
 <head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <title>Canvas</title>
+  <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
+<body onload="move_init()">
+<script type="text/javascript">
+    var img=[];
+    function getImage(){
+
+    $.getJSON("/images", function(data){    
+      $(".image ul").empty();
+      $.each(data, function (i, f) {  
+              //show all images on directory that uploads                           
+                $(".image ul").append("<li class='img-rounded'><img src="+f+" id=\"image\"/></li><br />");
+                //show image on canvas
+                $(".block ul").append("<li class='img-rounded'  onmousedown='_move_item(this);'><img src="+f+" id=\"image\"/></li><br />");
+
+            });
+      img=data;
+    });
+  };
 
 
+  $(document).ready(getImage());
+  
+  //add text
+  function add(){
+    $(".image li:last").append("<span>"+$("#text").val()+"</span>");
+  }   
 
-<body>
+  //remove image & text
+  function remove(){
+    $(".image li:last").remove();
+    img.pop();
+    $(".canvas li:last").remove();
 
-
-
-
-
-
-  <div id="box">
-    <div>Jack!</div>
+  }
+  //object of the element to be moved
+      _item = null;
+ 
+      //stores x & y co-ordinates of the mouse pointer
+      mouse_x = 0;
+      mouse_y = 0;
+ 
+      // stores top,left values (edge) of the element
+      image_x = 0;
+      image_y = 0;
+ 
+      //bind the functions
+      function move_init()
+      {
+        document.onmousemove = _move;
+        document.onmouseup = _stop;
+      }
+ 
+      //destroy the object when we are done
+      function _stop()
+      {
+        _item = null;
+      }
+ 
+      //main functions which is responsible for moving the element (div in our example)
+      function _move(e)
+      {
+        mouse_x = document.all ? window.event.clientX : e.pageX;
+        mouse_y = document.all ? window.event.clientY : e.pageY;
+        if(_item != null)
+        { 
+          _item.style.left = (mouse_x - image_x) + "px";
+          _item.style.top = (mouse_y - image_y) + "px";
+        }
+      }
+ 
+      //will be called when use starts dragging an element
+      function _move_item(canvas)
+      {
+        //store the object of the element which needs to be moved
+        _item = canvas;
+        image_x = mouse_x - _item.offsetLeft;
+        image_y = mouse_y - _item.offsetTop;
+ 
+      }
+  </script>
+<!-- side pane -->
+<div class="sidepane col-sm-2 col-md-2 col-lg-2">
+  <form action="/uploads" method="post" enctype="multipart/form-data">
+  <div class="form">
+    <h3>Form</h3>
+    
+      <input type="file" class="form-control" placeholder="Upload Your Images" name="upload">
+      <button id="submit" class="btn btn-default" onclick="getImage();">upload</button>
+    
+    <!-- Upload Form here -->
   </div>
-
-
-  <div id="alpr-images-box">
-    <div id="alpr-images">
-      I was here all along!
+  </form>
+  <hr />
+  <div class="assets">
+    <h3>Assets</h3>
+    <div class="image"  >
+        <h4>Images</h4>
+        <ul class="list-unstyled">
+               
+            <!-- List of images here -->
+            <!-- <li><img src="images/sample.jpeg" class="img-rounded" /></li> -->
+        </ul>
+      </form>
     </div>
   </div>
-
-  <script>
-    function loadImages(event) {
-      const alprImagesBox = document.getElementById('alpr-images-box')
-      const alprPlateDiv = document.createElement("div")
-      alprPlateDiv.innerHTML = 'ALpr images prepended here'
-      alprImagesBox.insertBefore(alprPlateDiv, alprImagesBox.firstChild)
-    };
-
-    loadImages()
-  </script>
-
+</div>
+<!-- canvas -->
+<div class="canvas col-sm-8 col-md-8 col-lg-8" >
+    <div class="block">
+      <ul>
+        <!-- Add images and texts to here -->
+      </ul>
+    </div>
+</div>
 
 </body>
-
 </html>
