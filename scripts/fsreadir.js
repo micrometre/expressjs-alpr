@@ -5,7 +5,6 @@ const serveIndex = require('serve-index')
 const path = require('path');
 const fs = require( 'fs' );
 
-
 const app = express();
 
 const PORT = 5000
@@ -16,19 +15,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', express.static('public'));
-app.use('/images', express.static('public/images'))
-app.use(express.static('/public/images'));
-
-
-
-app.get( '/images', ( req, res ) => {
-  let file_path = req.protocol + '://' + req.get('host') + '/images/';
-  let files = fs.readdirSync( './public/images/' );
-  files = files
-          .map( f => file_path + f ); // map with url path
-  res.json( files );
-});
-
 
 
 
@@ -41,9 +27,9 @@ function eventsHandler(request, response, next) {
     'Cache-Control': 'no-cache'
   };
   response.writeHead(200, headers);
-  response.write(data);
 
   const data = `data: ${JSON.stringify(facts)}\n\n`;
+  response.write(data);
 
   const clientId = Date.now();
 
@@ -82,6 +68,16 @@ app.get('/video', (req, res) => {
   res.sendFile('alprVideo.mp4', { root: 'public/uploads' });
 
 });
+
+
+app.get( '/images', ( req, res ) => {
+  let file_path = req.protocol + '://' + req.get('host') + '/images/';
+  let files = fs.readdirSync( './public/images/' );
+  files = files
+          .map( f => file_path + f ); // map with url path
+  res.json( files );
+});
+
 
 
 

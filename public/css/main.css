@@ -6,35 +6,14 @@
       border: 15px solid green;
       height: 50px;
       width: 200px;
-      background-color: coral;
       padding: 5rem;
       border: 10px solid black;
       margin: 1rem;
       overflow: scroll;
     }
 
-    #alpr-image {
+
+       #alpr-image {
       border: 15px solid green;
-      height: 50px;
+      height: 200px;
     }
-
-
-
-  #animated-bg {
-  transition: background 6s;
-  min-height:50vh;
-  position:relative;
-  background-size: cover;
-  background-color: white no-repeat center center fixed;
-  transition: 3s;
-}
-#animated-bg:before {
-content:"";
-position:absolute;
-top:0;
-bottom:0;
-left:0;
-right:0;
-background-color: #4b555f;
-opacity:0.3;
-}
