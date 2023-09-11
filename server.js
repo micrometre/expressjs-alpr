@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const serveIndex = require('serve-index')
 const path = require('path');
 const fs = require( 'fs' );
 
