@@ -1,0 +1,17 @@
+body {
+  border: 15px solid blue;
+}
+
+#box {
+  border: 3px solid green;
+  height: 50px;
+  width: 400px;
+  padding: 5rem;
+  overflow: scroll;
+}
+
+
+   #alpr-image {
+  border: 4px solid green;
+  height: 200px;
+}
