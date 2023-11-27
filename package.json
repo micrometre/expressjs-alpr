@@ -6,6 +6,8 @@
     "test": "nodemon  --ext 'ejs, css,html, js' & browser-sync start --proxy 'localhost:5000' --files 'public'",
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "alprd" : "docker-compose -f openalpr-docker/docker-compose.yml up -d",
+    "alprd-stop" : "docker-compose -f openalpr-docker/docker-compose.yml down -v",
     "debug": "DEBUG=anpr-app:* npm dev"
   },
   "dependencies": {

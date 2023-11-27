@@ -6,7 +6,7 @@ const fs = require( 'fs' );
 
 const app = express();
 
-const PORT = 5000
+const PORT = 3000
 let clients = [];
 let facts = [];
 
@@ -49,7 +49,7 @@ app.get('/events', eventsHandler);
 
 
 
-app.post('/anpr', addFact);
+app.post('/alpr', addFact);
 function sendEventsToAll(newFact) {
   clients.forEach(client => client.response.write(`data: ${JSON.stringify(newFact)}\n\n`))
 }
