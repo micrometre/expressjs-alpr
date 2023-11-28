@@ -8,7 +8,9 @@
     "dev": "nodemon server.js",
     "alprd" : "docker-compose -f openalpr-docker/docker-compose.yml up -d",
     "alprd-stop" : "docker-compose -f openalpr-docker/docker-compose.yml down -v",
+    "del-images" : "sudo rm public/images/*",
     "debug": "DEBUG=anpr-app:* npm dev"
+
   },
   "dependencies": {
     "body-parser": "^1.20.2",
