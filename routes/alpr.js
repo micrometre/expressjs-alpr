@@ -7,6 +7,8 @@ let facts = [];
 
 
 
+
+
 function eventsHandler(request, response, next) {
   const headers = {
     'Content-Type': 'text/event-stream',
@@ -37,7 +39,7 @@ router.get('/events', eventsHandler);
 
 
 
-router.post('/anpr', addFact);
+router.post('/', addFact);
 function sendEventsToAll(newFact) {
   clients.forEach(client => client.response.write(`data: ${JSON.stringify(newFact)}\n\n`))
 }
@@ -53,4 +55,6 @@ async function addFact(request, respsonse, next) {
 
 
 
+
 module.exports = router;
+;
